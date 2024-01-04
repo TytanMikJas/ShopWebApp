@@ -17,11 +17,12 @@
             <p>Weight: <input type="number" step="any" th:field="*{weight}" /></p>
             <p>Price: <input type="number" step="any" th:field="*{price}" /></p>
             <div>
-                <label for="category">Category:</label>
-                <select id="category" name="category" th:field="*{category}" style="width:50%">
+                <label th:for="${categoryId}">Category:</label>
+                <select th:field="*{categoryId}" style="width:50%">
                     <option th:each="category : ${categoryOptions}"
                             th:text="${category.categoryName}"
-                            th:value="${category}">
+                            th:value="${category.id}"
+                            th:selected="${category.id==product.categoryId}">
                     </option>
                 </select>
             </div>

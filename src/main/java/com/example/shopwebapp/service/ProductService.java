@@ -1,16 +1,23 @@
 package com.example.shopwebapp.service;
 
+import com.example.shopwebapp.entity.Category;
 import com.example.shopwebapp.entity.Product;
+import com.example.shopwebapp.optionModel.IdStringModel;
+import com.example.shopwebapp.repository.CategoryRepository;
 import com.example.shopwebapp.repository.ProductRepository;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     public ProductService() {
     }
@@ -40,6 +47,16 @@ public class ProductService {
         productRepository.save(prod1);
         productRepository.save(prod2);
         productRepository.save(prod3);
+    }
+
+    public List<IdStringModel> getCategoryOptions() {
+        List<IdStringModel> result = new ArrayList<>();
+        result.add(new IdStringModel(0, "---"));
+        List<Category> categoryList = categoryRepository.findAll();
+        for (Category category : categoryList) {
+            result.add(new IdStringModel(category.getId(), category.getCategoryName()));
+        }
+        return result;
     }
 
     private boolean isEmpty() {
