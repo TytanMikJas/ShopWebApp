@@ -1,51 +1,72 @@
 package com.example.shopwebapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
 public class ProductService {
-    ArrayList<Product> productList = new ArrayList<>();
+    @Autowired
+    ProductRepository productRepository;
+//    ArrayList<Product> productList = new ArrayList<>();
 
-    public ProductService() {}
+    public ProductService() {
+    }
 
-    public void seed(){
-    productList.add(new Product(1,"Chleb", 0.15, 1.21));
-    productList.add(new Product(2,"Malso", 0.2, 3.14));
-    productList.add(new Product(3,"Kiełbasa", 0.5, 21.15));
+    public void seed() {
+        Product prod1 = Product.builder()
+                .id(1)
+                .productName("Chleb")
+                .weight(0.15)
+                .price(1.21)
+                .build();
+
+        Product prod2 = Product.builder()
+                .id(2)
+                .productName("Masło")
+                .weight(0.2)
+                .price(3.14)
+                .build();
+
+        Product prod3 = Product.builder()
+                .id(3)
+                .productName("Kiełbasa")
+                .weight(0.5)
+                .price(21.15)
+                .build();
+
+        productRepository.save(prod1);
+        productRepository.save(prod2);
+        productRepository.save(prod3);
     }
 
     private boolean isEmpty() {
-        return productList.isEmpty();
+        return productRepository.count() == 0;
     }
 
     public List<Product> getAllProduct() {
-        return productList;
+        return productRepository.findAll();
     }
 
     public void addProduct(Product product) {
-        productList.add(product);
+        productRepository.save(product);
     }
 
     public Product getProductById(long id) {
-        for(Product product:productList){
-            if(product.getId()==id)
-                return product;
-        }
-        return null;
+        var value = productRepository.findById(id);
+        return value.orElse(null);
     }
 
     public void updateProduct(Product product) {
-        deleteProduct(product);
-        productList.add(product);
+        productRepository.save(product);
     }
 
     public void deleteProduct(Product product) {
-        productList.remove(getProductById(product.getId()));
+        productRepository.deleteById(product.getId());
     }
 
     public void deleteProductById(long id) {
-        productList.remove(getProductById(id));
+        productRepository.deleteById(id);
     }
 }

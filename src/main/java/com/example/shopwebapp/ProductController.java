@@ -20,9 +20,9 @@ public class ProductController {
     @GetMapping("/product/")
     public String home(Locale locale, Model model) {
         Date date = new Date();
-        DateFormat dateFromat = DateFormat.getDateTimeInstance(DateFormat.LONG,
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,
                 DateFormat.LONG, locale);
-        String serverTime = dateFromat.format(date);
+        String serverTime = dateFormat.format(date);
         model.addAttribute("serverTime", serverTime);
         List<Product> productList = productService.getAllProduct();
         model.addAttribute("productList", productList);
