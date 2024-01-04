@@ -9,45 +9,45 @@
     <title>Basket</title>
 </head>
 
-
 <body>
+<header th:replace="fragments/header::myheader"></header>
+<main>
+    <h1>Your basket</h1>
+    <h2>
+        Products
+        <a class="btn btn-success" th:href="@{/product/add}">Add Product</a>
+    </h2>
+    <div class="content">
+        <table class="display table table-bordered" style="width:800px">
 
-    <header th:replace="fragments/header::myheader"> </header>
-    <main>
+            <thead class="text-center">
+            <tr>
+                <th class="text-right">Id</th>
+                <th class="text-left">Nazwa Produktu</th>
+                <th class="text-left">Waga [kg]</th>
+                <th class="text-left">Cena [pln]</th>
+                <th class="text-center" colspan="3">Akcja</th>
+            </tr>
+            </thead>
 
-        <h1>Your basket</h1>
-        <h2>Products</h2>
-        <div class="content">
-            <table class="display table table-bordered" style="width:800px">
+            <tbody>
+            <tr th:each="product : ${productList}">
+                <td class="text-right" th:text="${product.getId()}"></td>
+                <td class="text-left" th:text="${product.getProductName()}"></td>
+                <td class="text-left" th:text="${product.getWeight()}"></td>
+                <td class="text-left" th:text="${product.getPrice()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/product/details/{id}(id=${product.id})}">details</a></td>
+                <td><a class="btn btn-primary"
+                       th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>
+            </tr>
+            </tbody>
 
-                <thead class="text-center">
-                <tr>
-                    <th class="text-right">Id</th>
-                    <th class="text-left">Nazwa Produktu</th>
-                    <th class="text-left">Waga [kg]</th>
-                    <th class="text-left">Cena [pln]</th>
-                    <th class="text-center" colspan="3">Akcja</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <tr th:each="product : ${productList}">
-                    <td class="text-right"th:text= "${product.getId()}"></td>
-                    <td class="text-left"th:text= "${product.getProductName()}"></td>
-                    <td class="text-left" th:text= "${product.getWeight()}"></td>
-                    <td class="text-left" th:text= "${product.getPrice()}"></td>
-                    <td><a class="btn btn-primary" th:href="@{/product/details/{id}(id=${product.id})}">details</a></td>
-                    <td><a class="btn btn-primary" th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
-                    <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>
-                </tr>
-                </tbody>
-
-            </table>
-        </div>
-        <p th:text="${serverTime}"></p>
-    </main>
-    <footer th:replace="fragments/footer::myfooter"> </footer>
+        </table>
+    </div>
+    <p th:text="${serverTime}"></p>
+</main>
+<footer th:replace="fragments/footer::myfooter"></footer>
 
 </body>
-
 </html>
