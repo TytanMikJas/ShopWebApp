@@ -1,4 +1,4 @@
-package com.example.shopwebapp;
+package com.example.shopwebapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

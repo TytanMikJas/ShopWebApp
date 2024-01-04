@@ -1,5 +1,7 @@
-package com.example.shopwebapp;
+package com.example.shopwebapp.service;
 
+import com.example.shopwebapp.entity.Product;
+import com.example.shopwebapp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

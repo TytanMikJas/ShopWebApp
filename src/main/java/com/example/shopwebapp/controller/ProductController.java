@@ -1,5 +1,7 @@
-package com.example.shopwebapp;
+package com.example.shopwebapp.controller;
 
+import com.example.shopwebapp.entity.Product;
+import com.example.shopwebapp.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
