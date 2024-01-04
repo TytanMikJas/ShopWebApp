@@ -14,8 +14,8 @@
 <main>
     <h1>Your cart</h1>
     <h2>
-        Products
-        <a class="btn btn-success" th:href="@{/product/add}">Add Product</a>
+        Categories
+        <a class="btn btn-success" th:href="@{/category/add}">Add Category</a>
     </h2>
     <div class="content">
         <table class="display table table-bordered" style="width:800px">
@@ -23,23 +23,21 @@
             <thead class="text-center">
             <tr>
                 <th class="text-right">Id</th>
-                <th class="text-left">Nazwa Produktu</th>
-                <th class="text-left">Waga [kg]</th>
-                <th class="text-left">Cena [PLN]</th>
+                <th class="text-left">Nazwa Kategorii</th>
+                <th class="text-left">Kod</th>
                 <th class="text-center" colspan="3">Akcja</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="product : ${productList}">
-                <td class="text-right" th:text="${product.getId()}"></td>
-                <td class="text-left" th:text="${product.getProductName()}"></td>
-                <td class="text-left" th:text="${product.getWeight()}"></td>
-                <td class="text-left" th:text="${product.getPrice()}"></td>
-                <td><a class="btn btn-primary" th:href="@{/product/details/{id}(id=${product.id})}">details</a></td>
+            <tr th:each="category : ${categoryList}">
+                <td class="text-right" th:text="${category.getId()}"></td>
+                <td class="text-left" th:text="${category.getCategoryName()}"></td>
+                <td class="text-left" th:text="${category.getCode()}"></td>
+                <td><a class="btn btn-primary" th:href="@{/category/details/{id}(id=${category.id})}">details</a></td>
                 <td><a class="btn btn-primary"
-                       th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>
-                <td><a class="btn btn-danger" th:href="@{/product/remove(id=${product.id})}">remove</a></td>
+                       th:href="@{/category/{categoryId}/edit(categoryId=${category.getId()})}">edit</a></td>
+                <td><a class="btn btn-danger" th:href="@{/category/remove(id=${category.id})}">remove</a></td>
             </tr>
             </tbody>
 

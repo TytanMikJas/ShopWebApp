@@ -13,10 +13,9 @@
     <main>
         <h1>Edit product</h1>
         <form action="#" th:action="@{/product/edit}" th:object="${product}" method="post">
-            <p>Id: <input type="text" th:field="*{id}" /></p>
             <p>First name: <input type="text" th:field="*{productName}" /></p>
-            <p>Last name: <input type="number" th:field="*{weight}" /></p>
-            <p>index: <input type="number" th:field="*{price}" /></p>>
+            <p>Last name: <input type="number" step="any" th:field="*{weight}" /></p>
+            <p>index: <input type="number" step="any" th:field="*{price}" /></p>>
             <p><input type="submit" value="Modify" /> <input type="reset" value="Reset" /></p>
         </form>
     </main>

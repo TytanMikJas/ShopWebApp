@@ -13,10 +13,9 @@
     <main>
         <h1>Add a new product</h1>
         <form action="#" th:action="@{/product/add}" th:object="${product}" method="post">
-            <p>Id: <input type="text" th:field="*{id}" /></p>
             <p>Product Name: <input type="text" th:field="*{productName}" /></p>
-            <p>Weight: <input type="number" th:field="*{weight}" /></p>
-            <p>Price: <input type="number" th:field="*{price}" /></p>
+            <p>Weight: <input type="number" step="any" th:field="*{weight}" /></p>
+            <p>Price: <input type="number" step="any" th:field="*{price}" /></p>
             <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
         </form>
     </main>

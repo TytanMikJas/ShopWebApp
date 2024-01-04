@@ -11,7 +11,6 @@ import java.util.List;
 public class ProductService {
     @Autowired
     ProductRepository productRepository;
-//    ArrayList<Product> productList = new ArrayList<>();
 
     public ProductService() {
     }

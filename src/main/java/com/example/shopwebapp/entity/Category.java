@@ -8,13 +8,12 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="Product")
-public class Product {
+@Table(name="Category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @Column(nullable = false)
-    private String productName;
-    private double weight;
-    private double price;
+    private String categoryName;
+    private String code;
 }
