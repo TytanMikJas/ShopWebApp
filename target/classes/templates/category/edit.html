@@ -14,8 +14,8 @@
     <h1>Edit category</h1>
     <form action="#" th:action="@{/category/edit}" th:object="${category}" method="post">
         <p>Id: <input type="text" th:field="*{id}" /></p>
-        <p>First name: <input type="text" th:field="*{categoryName}" /></p>
-        <p>Last name: <input type="text" th:field="*{code}" /></p>
+        <p>Category Name: <input type="text" th:field="*{categoryName}" /></p>
+        <p>Code: <input type="text" th:field="*{code}" /></p>
         <p><input type="submit" value="Modify" /> <input type="reset" value="Reset" /></p>
     </form>
 </main>

@@ -32,7 +32,6 @@ public class ProductController {
         return "product/index";
     }
 
-
     @GetMapping("/product/seed")
     public String seed() {
         productService.seed();
@@ -61,9 +60,9 @@ public class ProductController {
     @GetMapping(value = {"/product/{prodId}/edit"})
     public String edit(Model model, @PathVariable("prodId") long prodId) {
         model.addAttribute("product", productService.getProductById(prodId));
+        model.addAttribute("categoryOptions", productService.getCategoryOptions());
         return "product/edit";
     }
-
 
     @PostMapping(value = {"/product/edit"})
     public String edit(@ModelAttribute Product product) {
@@ -76,5 +75,4 @@ public class ProductController {
         productService.deleteProductById(inputId);
         return "redirect:/product/";
     }
-
 }
