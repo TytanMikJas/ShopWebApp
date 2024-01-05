@@ -37,7 +37,7 @@
                 <td class="text-left" th:text="${product.getProductName()}"></td>
                 <td class="text-left" th:text="${product.getWeight()}"></td>
                 <td class="text-left" th:text="${product.getPrice()}"></td>
-                <td class="text-left" th:text="${product.getCategory()}"></td>
+                <td class="text-left" th:text="${product.category != null ? product.category.categoryName : ''}"></td>
                 <td><a class="btn btn-primary" th:href="@{/product/details/{id}(id=${product.id})}">details</a></td>
                 <td><a class="btn btn-primary"
                        th:href="@{/product/{productId}/edit(productId=${product.getId()})}">edit</a></td>

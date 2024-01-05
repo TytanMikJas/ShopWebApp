@@ -16,16 +16,16 @@
             <p>Product Name: <input type="text" th:field="*{productName}" /></p>
             <p>Weight: <input type="number" step="any" th:field="*{weight}" /></p>
             <p>Price: <input type="number" step="any" th:field="*{price}" /></p>
-            <!--<div>
-                <label th:for="${category.id}">Category:</label>
-                    <select th:field="*{category.id}" style="width:50%">
-                        <option th:each="category : ${categoryOptions}"
-                                th:text="${category.categoryName}"
-                                th:value="${category.id}"
-                                th:selected="${category.id==product.category.id}">
-                        </option>
-                    </select>
-            </div>-->
+            <div>
+                <label for="categoryId">Category:</label>
+                <select id="categoryId" name="categoryId" th:field="*{category.id}" style="width:50%">
+                    <option th:each="category : ${categoryOptions}"
+                            th:text="${category.name}"
+                            th:value="${category.id}"
+                            th:selected="${category.id == product.category.id}">
+                    </option>
+                </select>
+            </div>
             <p><input type="submit" value="Add" /> <input type="reset" value="Reset" /></p>
         </form>
     </main>
