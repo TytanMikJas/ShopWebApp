@@ -5,10 +5,12 @@
                 <a class="navbar-brand" href="/">Cart</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="/product/">Product</a></li>
-                <li><a href="/category/">Category</a></li>
-<!--                <li><a href="/product/seed">Seed</a></li>-->
-<!--                <li><a href="/product/add">Add new</a></li>-->
+                <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="/product/">Product</a></li>
+                <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="/category/">Category</a></li>
+                <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="/admin-page/">Admin</a></li>
+                <li th:if="${#authorization.expression('hasAuthority(''USER'')')}"><a href="/user-page/">User</a></li>
+                <li><a href="/registration">Register</a> </li>
+
             </ul>
         </div>
     </nav>
