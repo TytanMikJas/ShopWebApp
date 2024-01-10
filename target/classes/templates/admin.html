@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="text/html; UTF-8">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+<body>
+<header th:replace="fragments/header::myheader"></header>
+    <div class="header">
+        <h1>ADMIN Dashboard</h1>
+    </div>
+    <div class="container">
+        
+        <span sec:authorize="isAuthenticated">
+        <a th:href="@{/logout}">
+         Logout
+        
+        </a>
+        
+        </span>
+
+    </div>
+</body>
+</html>
