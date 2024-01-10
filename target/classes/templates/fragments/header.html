@@ -10,6 +10,7 @@
                 <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a href="/admin-page/">Admin</a></li>
                 <li th:if="${#authorization.expression('hasAuthority(''USER'')')}"><a href="/user-page/">User</a></li>
                 <li th:if="${#authorization.expression('hasAuthority(''USER'')')}"><a href="/shop/">Shop</a> </li>
+                <li th:if="${#authorization.expression('hasAuthority(''USER'')')}"><a href="/cart/">Cart</a> </li>
                 <li><a href="/registration">Register</a> </li>
             </ul>
         </div>

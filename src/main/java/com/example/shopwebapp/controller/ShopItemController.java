@@ -38,17 +38,29 @@ public class ShopItemController {
         return "shopItem/index";
     }
 
+    @GetMapping("/cart/")
+    public String home2(Locale locale, Model model) {
+        Date date = new Date();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+        String serverTime = dateFormat.format(date);
+        model.addAttribute("serverTime", serverTime);
+
+        List<ShoppingCart> shoppingCartList = shoppingCartService.getAllShoppingCartItems();
+        model.addAttribute("shoppingCartList", shoppingCartList);
+
+        return "shoppingCart/index";
+    }
+
     @GetMapping("/shopItem/add")
     public String add(Model model) {
         model.addAttribute("shoppingCart", new ShoppingCart());
         model.addAttribute("categoryOptions", productService.getCategoryOptions());
-        return "shopItem/add";
+        return "redirect:/shop/";
     }
 
     @PostMapping("/shopItem/add")
     public String add(@ModelAttribute Product product) {
-        // TODO: replace with shoppingCartService:
         shoppingCartService.addProduct(product);
-        return "redirect:/cart/";
+        return "redirect:/shop/";
     }
 }

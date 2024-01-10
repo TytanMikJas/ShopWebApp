@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class ShoppingCartService {
     @Autowired
-    ShoppingCartRepository shoppingCartRepository;
+    private ShoppingCartRepository shoppingCartRepository;
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -23,14 +23,12 @@ public class ShoppingCartService {
         return shoppingCartRepository.count() == 0;
     }
 
-    public List<ShoppingCart> getAllProduct() {
+    public List<ShoppingCart> getAllShoppingCartItems() {
         return shoppingCartRepository.findAll();
     }
 
     public void addProduct(Product product) {
         ShoppingCart shoppingCart = new ShoppingCart();
-
-        // Set properties from the provided Product
         shoppingCart.setProductName(product.getProductName());
         shoppingCart.setWeight(product.getWeight());
         shoppingCart.setPrice(product.getPrice());
