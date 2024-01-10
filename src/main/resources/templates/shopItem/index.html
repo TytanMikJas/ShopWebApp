@@ -20,7 +20,6 @@
 
             <thead class="text-center">
             <tr>
-                <th class="text-right">Id</th>
                 <th class="text-left">Nazwa Produktu</th>
                 <th class="text-left">Waga [kg]</th>
                 <th class="text-left">Cena [PLN]</th>
@@ -31,7 +30,6 @@
 
             <tbody>
             <tr th:each="product : ${productList}">
-                <td class="text-right" th:text="${product.getId()}"></td>
                 <td class="text-left" th:text="${product.getProductName()}"></td>
                 <td class="text-left" th:text="${product.getWeight()}"></td>
                 <td class="text-left" th:text="${product.getPrice()}"></td>
