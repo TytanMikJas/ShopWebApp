@@ -1,16 +1,17 @@
 package com.example.shopwebapp.controller;
 
+import com.example.shopwebapp.entity.Category;
 import com.example.shopwebapp.entity.Product;
-import com.example.shopwebapp.entity.ShoppingCart;
 import com.example.shopwebapp.service.ProductService;
-import com.example.shopwebapp.service.ShoppingCartService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -18,11 +19,9 @@ import java.util.Locale;
 @Controller
 public class ShopItemController {
     private final ProductService productService;
-    private final ShoppingCartService shoppingCartService;
 
-    public ShopItemController(ProductService productService, ShoppingCartService shoppingCartService) {
+    public ShopItemController(ProductService productService) {
         this.productService = productService;
-        this.shoppingCartService = shoppingCartService;
     }
 
     @GetMapping("/shop/")
@@ -39,28 +38,41 @@ public class ShopItemController {
     }
 
     @GetMapping("/cart/")
-    public String home2(Locale locale, Model model) {
+    public String home2(Model model, HttpServletRequest request) {
         Date date = new Date();
-        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.getDefault());
         String serverTime = dateFormat.format(date);
         model.addAttribute("serverTime", serverTime);
 
-        List<ShoppingCart> shoppingCartList = shoppingCartService.getAllShoppingCartItems();
+        @SuppressWarnings("unchecked")
+        List<Product> shoppingCartList = (List<Product>) request.getSession().getAttribute("SHOPPING_CART");
+
+        if (shoppingCartList == null) {
+            shoppingCartList = new ArrayList<>();
+            request.getSession().setAttribute("SHOPPING_CART", shoppingCartList);
+        }
+
         model.addAttribute("shoppingCartList", shoppingCartList);
 
         return "shoppingCart/index";
     }
 
     @GetMapping("/shopItem/add")
-    public String add(Model model) {
-        model.addAttribute("shoppingCart", new ShoppingCart());
-        model.addAttribute("categoryOptions", productService.getCategoryOptions());
-        return "redirect:/shop/";
-    }
+    public String add(@RequestParam("productId") long productId, Model model, HttpServletRequest request) {
+        // model.addAttribute("shoppingCart", new ShoppingCart());
+        // model.addAttribute("categoryOptions", productService.getCategoryOptions());
+        Product product = productService.getProductById(productId);
 
-    @PostMapping("/shopItem/add")
-    public String add(@ModelAttribute Product product) {
-        shoppingCartService.addProduct(product);
+        @SuppressWarnings("unchecked")
+        List<Product> products = (List<Product>) request.getSession().getAttribute("SHOPPING_CART");
+        if (products == null) {
+            products = new ArrayList<>();
+            request.getSession().setAttribute("SHOPPING_CART", products);
+        }
+        products.add(product);
+        model.addAttribute("shoppingCartList", products);
+        request.getSession().setAttribute("SHOPPING_CART", products);
+
         return "redirect:/shop/";
     }
 }

@@ -34,7 +34,7 @@
                 <td class="text-left" th:text="${product.getWeight()}"></td>
                 <td class="text-left" th:text="${product.getPrice()}"></td>
                 <td class="text-left" th:text="${product.category != null ? product.category.categoryName : ''}"></td>
-                <td><a class="btn btn-primary" th:href="@{/shopItem/add}">Add to Cart</a></td>
+                <td><a class="btn btn-primary" th:href="@{/shopItem/add(productId=${product.id})}">Add to Cart</a></td>
             </tr>
             </tbody>
 
