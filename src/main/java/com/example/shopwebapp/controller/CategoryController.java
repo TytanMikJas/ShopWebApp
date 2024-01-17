@@ -1,6 +1,7 @@
 package com.example.shopwebapp.controller;
 
 import com.example.shopwebapp.entity.Category;
+import com.example.shopwebapp.entity.Product;
 import com.example.shopwebapp.service.CategoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,10 +66,21 @@ public class CategoryController {
 
 
     @PostMapping(value = {"/category/edit"})
-    public String edit(@ModelAttribute Category category) {
-        categoryService.updateCategory(category);
+    public String edit(@ModelAttribute Category updatedCategory) {
+        Category originalCategory = categoryService.getCategoryById(updatedCategory.getId());
+
+        originalCategory.setCategoryName(updatedCategory.getCategoryName());
+        originalCategory.setCode(updatedCategory.getCode());
+
+        for (Product product : originalCategory.getProducts()) {
+            product.setCategory(originalCategory);
+        }
+
+        categoryService.updateCategory(originalCategory);
+
         return "redirect:/category/";
     }
+
 
     @GetMapping("/category/remove")
     public String delete(@RequestParam("id") long inputId) {
