@@ -21,6 +21,6 @@ public class Category {
 
     private String code;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Product> products;
 }
